@@ -1,0 +1,48 @@
+html
+	head
+		link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+
+	body
+		nav.navbar-light.bg-light.d-flex
+			nav.navbar-light.bg-light.d-flex
+				img(src='/images/greekhotel-logo-white.png')
+				a.navbar-brand.ml-2(href='/') List User
+			ul.navbar-nav
+				li.nav-item.active
+					a.nav-link(href='/') Home
+			ul.navbar-nav.ml-3
+				li.nav-item.active
+					a.nav-link(href="/users") Users
+			ul.navbar-nav.ml-3
+				li.nav-item.active
+					a.nav-link(href="/users/create") Create
+			ul.navbar-nav.ml-3
+				li.nav-item.active
+					a.nav-link(href="/users/search?q=") Search
+		.mt-50
+			h1 PRODUCT
+		.row.mt-50
+			each product in products
+				.col-sm-3.col-md-3.p-3
+					img.card-img-top(src=product.image)
+					.card-body
+						h5.hard-title= product.name
+						p.card-text= product.description
+						a.btn.btn-primary(href='/cart/add/'+ product.id) Add to cart
+			
+		nav(aria-label='...')
+			ul.pagination
+				li.page-item.disabled
+					a.page-link(href='#', tabindex='-1', aria-disabled='true') Previous
+				li.page-item
+					a.page-link(href='#') 1
+				li.page-item
+					a.page-link(href='http://localhost:2500/products?page=2') 2 
+				li.page-item
+					a.page-link(href='http://localhost:2500/products?page=3') 3
+				li.page-item
+					a.page-link(href='#') Next
+    
+
+					
+						
