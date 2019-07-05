@@ -8,7 +8,7 @@ block content
 		tr
 			th Name
 			th Phone
-
-			tr
-				td= user.name
-				td= user.phone
+			each user in users
+				tr
+					td= user.name
+					td= user.phone

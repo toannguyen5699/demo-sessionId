@@ -11,7 +11,7 @@ var router = express.Router();
 
 
 
-router.get('/',authMiddleware.requireAuth, controller.index);
+router.get('/', controller.index);
 
 router.get('/search', controller.search);
 

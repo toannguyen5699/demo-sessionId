@@ -1,39 +1,53 @@
+var User = require('../models/user.model');
 var db = require('../db');
 var shortid = require('shortid');
 var multer  = require('multer');
 
-module.exports.index = function(req, res) {
-	res.render('users/index', {
-		users: db.get('users').value()
+module.exports.index = async function(req, res) {
+	var users= await User.find();
+		res.render('users/index', {
+		users: users
 	});
+		
 };
 
-module.exports.search = function(req, res){
+module.exports.search = async function(req, res){
 	var q = req.query.q;
-	var matchedUsers = db.get('users').value().filter(function(user) {
+	var users = await User.find();
+	var matchedUsers = users.filter(function(user) {
 		return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
 	});
-	res.render('users/search', {
+	/*res.render('users/search', {
+		users: matchedUsers
+	});*/
+		res.render('users/search', {
 		users: matchedUsers
 	});
 };
 
-module.exports.create = function(req, res) {
+module.exports.create = async function(req, res) {
 	res.render('users/create');
 };
 
-module.exports.get = function(req, res) {
+module.exports.get = async function(req, res) {
 	var id = req.params.id;
-
-	var user = db.get('users').find({ id: id}).value();
-	res.render('users/view', {
-		user: user
+	var users = await User.find(); 
+	var matchedUser = users.filter(function(user) {
+		return user.id.id !== -1;
+	});
+		res.render('users/view', {
+		users: matchedUser
 	});
 };
 
-module.exports.postCreate = function(req,res) {
-	req.body.id = shortid.generate();
+module.exports.postCreate = async function(req,res) {
 	req.body.avatar = req.file.path.split('/').slice(1).join('/');
-	db.get('users').push(req.body).write();
+	var users = await User.find();
+	var user = new User({
+		name: req.body.name, 
+		phone: req.body.phone,
+		avatar: req.body.avatar 
+	});
+	user.save();
 	res.redirect('/users');
 };
