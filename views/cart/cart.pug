@@ -1,0 +1,26 @@
+extends ../layouts/common.pug
+
+block content
+    div(class="d-flex flex-column justify-content-center align-items-center")
+        table.table.w-50.mt-2
+            head
+                th Ảnh
+                th Tên sản phẩm
+                th Chi tiết
+                th Số lượng
+            body
+                each cart in arrcart
+                    form(action="users/search",method="GET",class="form-inline my-2 my-lg-0")
+                        tr  
+                            td
+                                img(src=cart.image, alt="",width="60px")
+                            td=cart.name
+                            td=cart.description
+                            td=cart.count
+                            //- td
+                            //-     a(href='/users/' + user.id) View
+                            //-     spaN &nbsp
+                            //-     a(href="/users/delete/"+user.id)
+                            //-         i.fas.fa-trash.btn.btn-outline-success.my-2.my-sm-0(style="cursor:pointer;")
+        a(href="/auth/login")
+                        button.btn.btn-danger(type='button').ml-2 Thanh Toán
